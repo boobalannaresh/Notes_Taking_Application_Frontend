@@ -5,6 +5,8 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API } from "./config";
+
 
 export function Login() {
 
@@ -31,7 +33,7 @@ export function Login() {
   
       onSubmit: async (values) => {
   
-        const login = await fetch(`http://localhost:4000/users/login`, {
+        const login = await fetch(`${API}/users/login`, {
           method: "POST",
           body: JSON.stringify(values),
           headers: { "Content-type": "application/json" }
