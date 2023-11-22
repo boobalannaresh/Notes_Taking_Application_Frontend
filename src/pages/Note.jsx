@@ -8,12 +8,14 @@ import { useNavigate } from "react-router-dom";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
+import parse from 'html-react-parser';
 
 
 export function Note({ title, date, note, _id, deleteButton, editButton }) {
 
     const roleId = localStorage.getItem("roleId")
-  
+
+  console.log(note)
     const ROLE_ID = {
     Admin:"0",
     NORAML_USER: "1"
@@ -23,18 +25,6 @@ export function Note({ title, date, note, _id, deleteButton, editButton }) {
   
   
     const navigate = useNavigate()
-  
-//   // Your HTML string
-// var htmlString = note;
-
-// // The string you want to remove
-// var stringToRemove = 'string';
-
-// // Create a regular expression with the string to remove
-// var regex = new RegExp(stringToRemove, 'g');
-
-// // Replace the string with an empty string
-// var modifiedHtmlString = htmlString.replace(regex, '');
 
     return (
       <Card className="profile-container">
@@ -55,9 +45,10 @@ export function Note({ title, date, note, _id, deleteButton, editButton }) {
         </div>
   
         {/* This is Conditional Rendering */}
-        <div className="show-note">
-        { show ? note : null }
-        </div>
+        
+      
+        { show ? parse(note) : null }
+     
         
         </CardContent>
   
