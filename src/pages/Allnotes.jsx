@@ -15,7 +15,7 @@ export function Allnotes() {
   console.log(notes)
 
   const getNotes = () => {
-    fetch(`${API}/notes`, {
+    fetch(`${API}/notes/own/${localStorage.getItem("email")}`, {
       method: "GET",
        headers: { "Authentication": localStorage.getItem("token") }
     })
@@ -26,11 +26,22 @@ export function Allnotes() {
   useEffect(() => getNotes(), []); //// => This is happening Auto Refresh
 
   const deleteNote = (id) => {
-    fetch(`${API}/notes/${id}`, {
-      method: "DELETE",
-      headers: { "Authentication": localStorage.getItem("token") }
-    }).then((data) => getNotes());
-    console.log("Deleting Movie", id);
+
+    try{
+      let ask= window.confirm("Are you deleteing this file ? 👋🤔");
+      if(ask){
+        fetch(`${API}/notes/${id}`, {
+          method: "DELETE",
+          headers: { "Authentication": localStorage.getItem("token") }
+        })
+        .then((data) => getNotes());
+        console.log("Deleting Movie", id);
+      }
+  }catch (error){
+     console.log(error)
+  }
+
+    
   };
 
 

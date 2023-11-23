@@ -44,7 +44,7 @@ export function Login() {
           alert(login.message)
         } else {
           localStorage.setItem("token", login.secretToken)
-          localStorage.setItem("roleId", login.permission)
+          localStorage.setItem("email", login.userEmail)
           alert(login.message)
           navigate("/portal/home")
         }
@@ -92,6 +92,8 @@ export function Login() {
         
         <p>Don't you have an account ? Click here 👉 <Link to="/signup">Sign Up</Link></p>
       
+      <p> For test : <b>Email: guvi@gmail.com </b></p>
+      <p><b>  password: password </b></p>
       </form>
     );
   }

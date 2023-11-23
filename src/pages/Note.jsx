@@ -12,14 +12,6 @@ import parse from 'html-react-parser';
 
 
 export function Note({ title, date, note, _id, deleteButton, editButton }) {
-
-    const roleId = localStorage.getItem("roleId")
-
-  console.log(note)
-    const ROLE_ID = {
-    Admin:"0",
-    NORAML_USER: "1"
-  }
   
     const [show, setShow] = useState(true)
   
@@ -30,7 +22,7 @@ export function Note({ title, date, note, _id, deleteButton, editButton }) {
       <Card className="profile-container">
         <h3 className="profile-pic">{title}</h3>
   
-        <CardContent >
+        <CardContent className="spec-desc">
         <div className="profile-spec">
           <h5 className="profile-title">Date: {date} </h5>
           <IconButton aria-label="Toggle Description" onClick={()=> setShow(!show)} color="primary">
@@ -45,14 +37,14 @@ export function Note({ title, date, note, _id, deleteButton, editButton }) {
         </div>
   
         {/* This is Conditional Rendering */}
-        
+        <div className="description" onClick={()=> navigate(`/portal/view/${_id}`) }>
       
         { show ? parse(note) : null }
      
-        
+        </div>
         </CardContent>
   
-        <CardActions>    
+        <CardActions className="action">    
         {editButton}   {deleteButton}
         </CardActions>
   

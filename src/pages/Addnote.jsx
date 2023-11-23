@@ -36,7 +36,7 @@ console.log(content)
 
     onSubmit: (values) => {
       addMovie(values);
-      console.log(values)
+      
    
     },
   });
@@ -44,8 +44,9 @@ console.log(content)
   const navigate = useNavigate();
 
   const addMovie = (values) => {
-    values.note = content
-    console.log(values)
+    values.note = content;
+    values.email = localStorage.getItem("email");
+    
     ////-----> Follow 3 step's <-----////
     //// Step's
     //// 1. Method => POST
@@ -60,8 +61,8 @@ console.log(content)
           "Authentication": localStorage.getItem("token")
         }
       })
+      .then(()=> alert("New note has created done 😃 👍 "))
         .then(() => navigate("/portal/allnotes"))
-
 
   };
 

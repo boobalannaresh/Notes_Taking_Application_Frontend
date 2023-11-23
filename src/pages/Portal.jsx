@@ -50,7 +50,7 @@ export function Portal({ mode, setMode }) {
               color="inherit"
               onClick={() => setMode(mode === "light" ? "dark" : "light")}
             >
-              {mode === "light" ? "dark" : "light"} Mode
+              {mode === "light" ? "dark" : "light"}
             </Button>
 
             <Button color="inherit" onClick={Logout}>LogOut</Button>

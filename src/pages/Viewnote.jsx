@@ -4,23 +4,34 @@ import Button from '@mui/material/Button';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { API } from "./config";
 import parse from 'html-react-parser';
+import loading from "../assets/loading.gif";
+import axios from "axios";
 
 export function Viewnote() {
-  const { id } = useParams();
+  const {_id} = useParams();
 
   const [note, setNote] = useState([])
 
-  useEffect(()=>{
-    fetch(`${API}/notes/${id}`,{
-      method:"GET",
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadData()
+}, []);
+
+let loadData = async () => {
+    setLoading(true)
+    let users = await axios.get(`${API}/notes/${_id}`,{
       headers:{"Authentication" : localStorage.getItem("token")}
-    })
-    .then((data)=> data.json())
-    .then((nts)=> setNote(nts))
-  })
+    });
+    setNote(users.data)
+    setLoading(false)
+}
 
   const navigate = useNavigate() 
+  
   return (
+    <div>{
+  isLoading ? <img className="loading" src="https://cdn.dribbble.com/users/5008510/screenshots/10840297/media/df7b4d1933701ea86c581ac730063966.gif" alt="image" /> :
 
       <div className="movie-detail-container">
         <div className="movie-spec">
@@ -32,8 +43,8 @@ export function Viewnote() {
 
         <Button variant="contained" startIcon={<ArrowBackIosIcon />} onClick={()=> navigate(-1)}>Back</Button>
       </div>
-
-     
+}
+</div>
 
   );
 }

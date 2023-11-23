@@ -33,8 +33,8 @@ function App() {
       <Route path="home" element={ <ProtectedRoute><Home /></ProtectedRoute>  } />
         <Route path="allnotes" element={ <ProtectedRoute><Allnotes /></ProtectedRoute>} />
         <Route path="add" element={ <ProtectedRoute><Addnote /></ProtectedRoute> } />
-        <Route path="edit" element={<ProtectedRoute><Editnote /></ProtectedRoute> } />
-        <Route path="view/:id" element={<ProtectedRoute><Viewnote /></ProtectedRoute> } />
+        <Route path="edit/:_id" element={<ProtectedRoute><Editnote /></ProtectedRoute> } />
+        <Route path="view/:_id" element={<ProtectedRoute><Viewnote /></ProtectedRoute> } />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
