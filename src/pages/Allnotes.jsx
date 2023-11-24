@@ -10,6 +10,14 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from "react-router-dom";
 import { API } from "./config";
 
+import Paper from '@mui/material/Paper';
+import InputBase from '@mui/material/InputBase';
+import Divider from '@mui/material/Divider';
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import DirectionsIcon from '@mui/icons-material/Directions';
+
+
 export function Allnotes() {
   const [notes, setNotes] = useState([]);
   console.log(notes)
@@ -48,6 +56,27 @@ export function Allnotes() {
   const navigate = useNavigate()
   return (
     <div>
+       <Paper
+      component="form"
+      sx={{ p: '2px 4px', display: 'flex', margin:'7px auto' ,alignItems: 'center', width: 600 }}
+    >
+      <IconButton sx={{ p: '10px' }} aria-label="menu">
+        <MenuIcon />
+      </IconButton>
+      <InputBase
+        sx={{ ml: 1, flex: 1 }}
+        placeholder="Search Google Maps"
+        inputProps={{ 'aria-label': 'search google maps' }}
+      />
+      <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+        <SearchIcon />
+      </IconButton>
+      <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+      <IconButton color="primary" sx={{ p: '10px' }} aria-label="directions">
+        <DirectionsIcon />
+      </IconButton>
+    </Paper>
+
       <div className="movie-list">
         {notes.map((store) => (
           <div key={store._id}>

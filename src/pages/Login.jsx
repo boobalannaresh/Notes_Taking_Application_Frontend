@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useFormik } from "formik";
@@ -6,12 +6,15 @@ import * as yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API } from "./config";
-
+import InputAdornment from '@mui/material/InputAdornment';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import IconButton from '@mui/material/IconButton';
 
 export function Login() {
 
     const navigate = useNavigate()
-  
+
     const loginValidationSchema = yup.object({
       email: yup
         .string()
@@ -76,7 +79,7 @@ export function Login() {
           id="outlined-basic"
           label="Password"
           variant="outlined"
-          type={"text"}
+          type={'password'}
           placeholder={"Enter your Password"}
           onChange={formik.handleChange}
           name="password"
@@ -84,6 +87,9 @@ export function Login() {
           error={formik.touched.password && formik.errors.password}
           helperText={formik.touched.password && formik.errors.password ? formik.errors.password : null}
         />
+
+                
+                 
   
   
         <Button variant="contained" type="submit">
