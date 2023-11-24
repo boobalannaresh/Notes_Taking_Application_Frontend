@@ -4,12 +4,8 @@ import Button from "@mui/material/Button";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { API } from "./config";
-import InputAdornment from '@mui/material/InputAdornment';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import IconButton from '@mui/material/IconButton';
+
 
 export function Login() {
 
@@ -79,7 +75,7 @@ export function Login() {
           id="outlined-basic"
           label="Password"
           variant="outlined"
-          type={'password'}
+          type={"password"}
           placeholder={"Enter your Password"}
           onChange={formik.handleChange}
           name="password"
