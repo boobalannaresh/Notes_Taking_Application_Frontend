@@ -16,22 +16,48 @@ import Divider from '@mui/material/Divider';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import DirectionsIcon from '@mui/icons-material/Directions';
+import TextField from "@mui/material/TextField";
+import axios from "axios";
+import { Button } from "@mui/material";
 
 
 export function Allnotes() {
+  
   const [notes, setNotes] = useState([]);
-  console.log(notes)
+
+  const [query, setQuery] = useState([]);
+  
+  const [sent, setSent] = useState([])
 
   const getNotes = () => {
+
     fetch(`${API}/notes/own/${localStorage.getItem("email")}`, {
       method: "GET",
        headers: { "Authentication": localStorage.getItem("token") }
     })
       .then((data) => data.json())
-      .then((nts) => setNotes(nts));
+      .then((nts) => setNotes(nts))
+      .then((nts) => setSent(nts))
   };
 
-  useEffect(() => getNotes(), []); //// => This is happening Auto Refresh
+  var searchName = query;
+
+  // const searchData = (data) => {
+    
+  //   setNotes(data.filter((item)=> keys.some((key)=> item[key].toLowerCase().includes(query))))
+    
+  // };
+
+  const searchData = (data) => {
+
+    setSent(data.filter((item)=> item.title.toLowerCase().indexOf(searchName.toLowerCase())>= 0));
+    
+  };
+
+  useEffect(() => {
+    getNotes()
+    
+  },  []); //// => This is happening Auto Refresh
 
   const deleteNote = (id) => {
 
@@ -49,12 +75,11 @@ export function Allnotes() {
      console.log(error)
   }
 
-    
   };
 
-
   const navigate = useNavigate()
-  return (
+  
+return (
     <div>
        <Paper
       component="form"
@@ -64,21 +89,18 @@ export function Allnotes() {
         <MenuIcon />
       </IconButton>
       <InputBase
-        sx={{ ml: 1, flex: 1 }}
-        placeholder="Search the title here"
-        inputProps={{ 'aria-label': 'search google maps' }}
+           sx={{ ml: 1, flex: 1 }}
+           placeholder="Search the title here"
+           inputProps={{ 'aria-label': 'search google maps' }}
+        onChange={(e)=> setQuery(e.target.value)}
       />
-      <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
-        <SearchIcon />
-      </IconButton>
-      <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-      <IconButton color="primary" sx={{ p: '10px' }} aria-label="directions">
-        <DirectionsIcon />
+      <IconButton type="button" sx={{ p: '10px' }} aria-label="search" onClick={()=> searchData(notes)} >
+        <SearchIcon /> <Button sx={{ p: '0px' }}>Search</Button>
       </IconButton>
     </Paper>
 
       <div className="movie-list">
-        {notes.map((store) => (
+        {( sent || notes ).map((store) => (
           <div key={store._id}>
 
             <Note
