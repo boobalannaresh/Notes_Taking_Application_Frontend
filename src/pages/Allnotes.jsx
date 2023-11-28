@@ -80,10 +80,10 @@ export function Allnotes() {
   const navigate = useNavigate()
   
 return (
-    <div>
+    <div className="all-notes">
        <Paper
       component="form"
-      sx={{ p: '2px 4px', display: 'flex', margin:'7px auto' ,alignItems: 'center', width: 600 }}
+      sx={{ p: '2px 4px', display: 'flex', margin:'7px auto' ,alignItems: 'center'}}
     >
       <IconButton sx={{ p: '10px' }} aria-label="menu">
         <MenuIcon />

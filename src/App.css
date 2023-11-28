@@ -38,6 +38,12 @@ margin: 20px auto;
   width:80%;
 }
 
+.all-notes{
+display: flex;
+flex-direction: column;
+flex-wrap: wrap;
+}
+
 .movie-list{
   display: flex;
   flex-wrap: wrap;
